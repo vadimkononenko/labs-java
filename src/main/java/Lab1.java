@@ -21,7 +21,7 @@ public class Lab1 {
 
         int avg = sumLength / strings.length;
         for (String s : strings) {
-            if (s.length() <= avg) resStrings.add(s);
+            if (s.length() < avg) resStrings.add(s);
         }
 
         resultStrings = new String[resStrings.size()];
