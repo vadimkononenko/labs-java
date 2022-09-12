@@ -10,9 +10,7 @@ public class Lab1 {
     }
 
     private static String[] getStringsLessThanAvg(String[] strings) {
-
         List<String> resStrings = new ArrayList<>();
-        String[] resultStrings;
 
         int sumLength = 0;
         for (String s : strings) {
@@ -24,7 +22,7 @@ public class Lab1 {
             if (s.length() < avg) resStrings.add(s);
         }
 
-        resultStrings = new String[resStrings.size()];
+        String[] resultStrings = new String[resStrings.size()];
         for (int i = 0; i < resStrings.size(); i++) {
             resultStrings[i] = resStrings.get(i);
         }
