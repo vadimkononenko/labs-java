@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Lab1 {
     public static void main(String[] args) {
-        String[] strings = {"sdfsdf", "ddddd", "eeeee", "123546sdfsdfsdf"};
+        String[] strings = {"12", "123", "1234", "123456123123"};
         for (String s : getStringsLessThanAvg(strings)) {
             System.out.println(s);
         }

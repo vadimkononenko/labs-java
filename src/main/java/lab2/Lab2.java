@@ -33,5 +33,6 @@ public class Lab2 {
         System.out.println(person1.equals(fromJsonPerson1));
         System.out.println(person2.equals(fromJsonPerson2));
         System.out.println(person2.equals(fromJsonPerson3));
+        System.out.println(person1.equals(fromJsonPerson2));
     }
 }
