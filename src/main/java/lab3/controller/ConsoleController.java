@@ -4,11 +4,15 @@ import lab3.model.Circle;
 import lab3.model.Rectangle;
 import lab3.model.Shape;
 import lab3.model.Triangle;
+import lab3.util.InputUtility;
+import lab3.view.ConsoleView;
 
 import java.util.Arrays;
 import java.util.Comparator;
 
 public class ConsoleController {
+
+    private final ConsoleView view;
     private final Shape[] shapes = {
             new Circle("red", 2),
             new Rectangle("blue", 2, 2),
@@ -19,29 +23,36 @@ public class ConsoleController {
             new Circle("purple", 5)
     };
 
-    public void showData() {
-        Arrays.stream(shapes).forEach(System.out::println);
+    public ConsoleController() {
+        this.view = new ConsoleView();
     }
 
-    public Double calcAllAreas() {
+    public void showData() {
+        view.printShapes(shapes);
+    }
+
+    public void calcAllAreas() {
         double sum = 0;
         for (Shape shape : shapes) {
             sum += shape.calcArea();
         }
-        return sum;
+        view.printAreas(sum);
     }
 
-    public <T> Double calcTypedAllAreas(Class<T> clazz) {
+    public void calcTypedAllAreas() {
+        Class<? extends Shape> clazz = InputUtility.inputType();
+
         double sum = 0;
         for (Shape shape : shapes) {
             if (shape.getClass() == clazz) {
                 sum += shape.calcArea();
             }
         }
-        return sum;
+
+        view.printAreasForTyped(clazz.toString(), sum);
     }
 
-    public Shape[] sortDecreaseArea() {
+    public void sortDecreaseArea() {
 //        Comparator<Shape> comparator = new Comparator<>() {
 //            @Override
 //            public int compare(Shape o1, Shape o2) {
@@ -54,21 +65,11 @@ public class ConsoleController {
 
         Shape[] sortedShapes = this.shapes.clone();
         Arrays.sort(sortedShapes, comparator);
-        return sortedShapes;
+
+        view.printSortedDecrease(sortedShapes);
     }
 
-    public Shape[] sortColor() {
-//        Comparator<Shape> comparator = new Comparator<Shape>() {
-//            @Override
-//            public int compare(Shape o1, Shape o2) {
-//                int res = String.CASE_INSENSITIVE_ORDER.compare(o1.getShapeColor(), o2.getShapeColor());
-//                if (res == 0) {
-//                    res = o1.getShapeColor().compareTo(o2.getShapeColor());
-//                }
-//                return res;
-//            }
-//        };
-
+    public void sortColor() {
         Comparator<Shape> comparator = (o1, o2) -> {
             int res = String.CASE_INSENSITIVE_ORDER.compare(o1.getShapeColor(), o2.getShapeColor());
             if (res == 0) {
@@ -79,6 +80,7 @@ public class ConsoleController {
 
         Shape[] sortedShapes = this.shapes.clone();
         Arrays.sort(sortedShapes, comparator);
-        return sortedShapes;
+
+        view.printSortedColor(sortedShapes);
     }
 }

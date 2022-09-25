@@ -1,66 +1,46 @@
 package lab3.view;
 
-import lab3.controller.ConsoleController;
-import lab3.model.Circle;
-import lab3.model.Rectangle;
 import lab3.model.Shape;
-import lab3.model.Triangle;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class ConsoleView {
-    public static void main(String[] args) {
-        ConsoleController controller = new ConsoleController();
-        Scanner scanner = new Scanner(System.in);
-        boolean flag = true;
-        String input;
+    public static final String INPUT_MENU =
+            "Enter 'show', 'calcArea', 'calcTyped', 'sortDecrease', 'sortColor' or 'q' to quit \n";
 
-        do {
-            input = scanner.next();
+    public static final String INPUT_TYPE = "Enter 't', 'r' or 'c'";
 
-            switch (input) {
-                case "show" ->
-                        controller.showData();
-                case "calcArea" ->
-                        System.out.println(controller.calcAllAreas());
-                case "calcTyped" ->
-                    System.out.println(selectType(controller));
-                case "sortDecrease" ->
-                        Arrays.stream(controller.sortDecreaseArea())
-                                .forEach(System.out::println);
-                case "sortColor" ->
-                        Arrays.stream(controller.sortColor())
-                                .forEach(System.out::println);
-                case "q" ->
-                        flag = false;
-            }
-        } while (flag);
+    public void printMessage(String message) {
+        System.out.println(message);
     }
 
-    private static Double selectType(ConsoleController controller) {
-        Scanner scanner = new Scanner(System.in);
-        String input;
-        Double res = 0.0;
-        boolean flag = true;
+    public void printShapes(Shape[] shapes) {
+        System.out.println("Shapes:");
+        Arrays.stream(shapes).forEach(System.out::println);
+        System.out.println();
+    }
 
-        do {
-            System.out.println("Enter 't', 'r', 'c'");
-            input = scanner.next();
-            if (input.equals("t")) {
-                flag = false;
-                res = controller.calcTypedAllAreas(Triangle.class);
-            }
-            if (input.equals("r")) {
-                flag = false;
-                res = controller.calcTypedAllAreas(Rectangle.class);
-            }
-            if (input.equals("c")) {
-                flag = false;
-                res = controller.calcTypedAllAreas(Circle.class);
-            }
-        } while (flag);
+    public void printAreas(Double area) {
+        System.out.println("Sum of all shape area: " + area + "\n");
+    }
 
-        return res;
+    public void printAreasForTyped(String shapeType, Double area) {
+        System.out.println("Sum area of " + shapeType + " : " + area + "\n");
+    }
+
+    public void printSortedDecrease(Shape[] shapes) {
+        System.out.println("Sorted decrease shapes:");
+        Arrays.stream(shapes).forEach(System.out::println);
+        System.out.println();
+    }
+
+    public void printSortedColor(Shape[] shapes) {
+        System.out.println("Sorted by color shapes:");
+        Arrays.stream(shapes).forEach(System.out::println);
+        System.out.println();
+    }
+
+    public void printGoodbye() {
+        System.out.println("Bye!");
     }
 }
