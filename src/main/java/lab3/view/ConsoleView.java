@@ -2,28 +2,65 @@ package lab3.view;
 
 import lab3.controller.ConsoleController;
 import lab3.model.Circle;
+import lab3.model.Rectangle;
 import lab3.model.Shape;
 import lab3.model.Triangle;
 
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class ConsoleView {
     public static void main(String[] args) {
-        ConsoleController consoleController = new ConsoleController();
+        ConsoleController controller = new ConsoleController();
+        Scanner scanner = new Scanner(System.in);
+        boolean flag = true;
+        String input;
 
-        Shape[] shapes = consoleController.sortDecreaseArea();
-        for (Shape shape : shapes) {
-            System.out.println("AREA: " + shape.calcArea() + " | " + shape);
-        }
+        do {
+            input = scanner.next();
 
-        System.out.println("------------------------");
+            switch (input) {
+                case "show" ->
+                        controller.showData();
+                case "calcArea" ->
+                        System.out.println(controller.calcAllAreas());
+                case "calcTyped" ->
+                    System.out.println(selectType(controller));
+                case "sortDecrease" ->
+                        Arrays.stream(controller.sortDecreaseArea())
+                                .forEach(System.out::println);
+                case "sortColor" ->
+                        Arrays.stream(controller.sortColor())
+                                .forEach(System.out::println);
+                case "q" ->
+                        flag = false;
+            }
+        } while (flag);
+    }
 
-        consoleController.showData();
+    private static Double selectType(ConsoleController controller) {
+        Scanner scanner = new Scanner(System.in);
+        String input;
+        Double res = 0.0;
+        boolean flag = true;
 
-        System.out.println("------------------------");
+        do {
+            System.out.println("Enter 't', 'r', 'c'");
+            input = scanner.next();
+            if (input.equals("t")) {
+                flag = false;
+                res = controller.calcTypedAllAreas(Triangle.class);
+            }
+            if (input.equals("r")) {
+                flag = false;
+                res = controller.calcTypedAllAreas(Rectangle.class);
+            }
+            if (input.equals("c")) {
+                flag = false;
+                res = controller.calcTypedAllAreas(Circle.class);
+            }
+        } while (flag);
 
-        System.out.println("Sum of areas: " + consoleController.calcAllAreas());
-
-        System.out.println("------------------------");
-
-        consoleController.calcTypedAllAreas(Triangle.class);
+        return res;
     }
 }

@@ -31,14 +31,14 @@ public class ConsoleController {
         return sum;
     }
 
-    public <T> void calcTypedAllAreas(Class<T> clazz) {
+    public <T> Double calcTypedAllAreas(Class<T> clazz) {
         double sum = 0;
         for (Shape shape : shapes) {
             if (shape.getClass() == clazz) {
                 sum += shape.calcArea();
             }
         }
-        System.out.println(sum);
+        return sum;
     }
 
     public Shape[] sortDecreaseArea() {
