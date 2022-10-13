@@ -1,26 +1,11 @@
 package lab4.enclosures;
 
-import java.util.ArrayList;
-import java.util.List;
+import lab4.animals.Animal;
+import lab4.animals.Mammal;
 
-public class MammalEnclosure extends Enclosure {
+public abstract class MammalEnclosure extends Enclosure {
 
-    private int capacity;
-    private List<MammalEnclosure> mammalEnclosures;
-
-    public MammalEnclosure() {
-        this.capacity = 20;
-        this.mammalEnclosures = new ArrayList<>();
+    public MammalEnclosure(int capacity) {
+        super(capacity);
     }
-
-    @Override
-    public int getEnclosureCapacity() {
-        return capacity;
-    }
-
-    @Override
-    public int getOccupiedEnclosures() {
-        return 0;
-    }
-
 }

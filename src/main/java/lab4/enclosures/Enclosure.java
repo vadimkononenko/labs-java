@@ -1,7 +1,30 @@
 package lab4.enclosures;
 
-public abstract class Enclosure {
-    public abstract int getEnclosureCapacity();
+import lab4.animals.Animal;
 
-    public abstract int getOccupiedEnclosures();
+public abstract class Enclosure {
+
+    final int capacity;
+
+    public Enclosure(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public abstract int getOccupiedPlaces();
+
+    public abstract void addAnimal(Animal animal);
+
+    public abstract void removeAnimal(Animal animal);
+
+    @Override
+    public String toString() {
+        return "Enclosure{" +
+                "capacity=" + capacity +
+                '}';
+    }
+
 }
